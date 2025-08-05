@@ -46,7 +46,7 @@ int main() {
     scanf(" %[^\n]", nomeCidadeCarta1);
 
     printf("Informe a População: ");
-    scanf("%d", &populacaoCarta1);
+    scanf("%ld", &populacaoCarta1);
 
     printf("Informe a Área (em km²): ");
     scanf("%f", &areaCarta1);
@@ -70,7 +70,7 @@ int main() {
     scanf(" %[^\n]", nomeCidadeCarta2);
 
     printf("Informe a População: ");
-    scanf("%d", &populacaoCarta2);
+    scanf("%ld", &populacaoCarta2);
 
     printf("Informe a Área (em km²): ");
     scanf("%f", &areaCarta2);
@@ -86,7 +86,7 @@ int main() {
     printf("Estado: %c\n", estadoCarta1);
     printf("Código: %s\n", codigoCarta1);
     printf("Nome da Cidade: %s\n", nomeCidadeCarta1);
-    printf("População: %d\n", populacaoCarta1);
+    printf("População: %ld\n", populacaoCarta1);
     printf("Área: %.2f km²\n", areaCarta1);
     printf("PIB: %.2f bilhões de reais\n", pibCarta1);
     printf("Número de Pontos Turísticos: %d\n", pontosturisticosCarta1);
@@ -151,7 +151,12 @@ printf("Super Poder: Carta 1 venceu? %d\n", venceuSuperPoder);
 }
 
 float Calcular(float dividendo, float divisor){
-    return dividendo / divisor;
+if (divisor != 0.0f) {
+        return dividendo / divisor;
+    } else {
+        printf("AVISO: Tentativa de divisão por zero! Retornando 0.0.\n");
+        return 0.0f;
+    }
 }
 
 float DefinirSuperPoder(
@@ -161,20 +166,37 @@ float DefinirSuperPoder(
     float pontosTuristicos,
     float pibPerCapita,
     float densidadePopulacional){
+        float inversoDensidade = 0.0f;
+        if (densidadePopulacional != 0.0f) {
+            inversoDensidade = 1.0f / densidadePopulacional;
+        } else {
+            printf("AVISO: Densidade populacional zero no Super Poder. Inverso desconsiderado.\n");
+        }
+
         float resultado = populacao 
         + area 
         + pib 
         + pontosTuristicos 
         + pibPerCapita 
-        + (1 / densidadePopulacional);
+        + inversoDensidade;
 
     return resultado;
     }
 
 float CalcularPibPerCapita(float pib, long int populacao) {
-    return Calcular(pib * 1000000000, (float)populacao);
+    if (populacao != 0L) {
+        return Calcular(pib * 1000000000.0f, (float)populacao);
+    } else {
+        printf("AVISO: População é zero no cálculo do PIB per capita. Retornando 0.0.\n");
+        return 0.0f;
+    }
 }
 
 float CalcularDensidadePopulacional(long int populacao, float area) {
-    return Calcular((float)populacao, area);
+    if (area != 0.0f) {
+        return Calcular((float)populacao, area);
+    } else {
+        printf("AVISO: Área é zero no cálculo da Densidade Populacional. Retornando 0.0.\n");
+        return 0.0f;
+    }
 }
