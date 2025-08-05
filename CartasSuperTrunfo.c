@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+float Calcular(float dividendo, float divisor);
 int main() {
     // Carta 1
     char estadoCarta1;
@@ -9,6 +10,7 @@ int main() {
     float areaCarta1;
     float pibCarta1;
     int pontosturisticosCarta1;
+    float densidadePopulacionalCarta1;
 
     // Carta 2
     char estadoCarta2;
@@ -18,6 +20,7 @@ int main() {
     float areaCarta2;
     float pibCarta2;
     int pontosturisticosCarta2;
+    float densidadePopulacionalCarta2;
 
     //Inicio de cadastro da carta 1
     printf("Cadastro da Carta 1:\n");
@@ -76,6 +79,8 @@ int main() {
     printf("Área: %.2f km²\n", areaCarta1);
     printf("PIB: %.2f bilhões de reais\n", pibCarta1);
     printf("Número de Pontos Turísticos: %d\n", pontosturisticosCarta1);
+    printf("Densidade Populacional cidade 1: %.2f\n", Calcular(populacaoCarta1, areaCarta1));
+    printf("PIB per Capita cidade 1: %.2f\n", Calcular(pibCarta1, populacaoCarta1));
 
     // Exibição da Carta 2
     printf("\nCarta 2:\n");
@@ -86,6 +91,11 @@ int main() {
     printf("Área: %.2f km²\n", areaCarta2);
     printf("PIB: %.2f bilhões de reais\n", pibCarta2);
     printf("Número de Pontos Turísticos: %d\n", pontosturisticosCarta2);
-
+    printf("Densidade Populacional ciade 2: %.2f\n", Calcular(populacaoCarta2, areaCarta2));
+    printf("PIB per Capita cidade 2: %.2f\n", Calcular(pibCarta2, populacaoCarta2));
     return 0;
+}
+
+float Calcular(float dividendo, float divisor){
+    return dividendo / divisor;
 }
