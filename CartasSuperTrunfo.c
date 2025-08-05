@@ -1,6 +1,9 @@
 #include <stdio.h>
 
 float Calcular(float dividendo, float divisor);
+float CalcularPibPerCapita(float pib, long int populacao);
+float CalcularDensidadePopulacional(long int populacao, float area);
+
 float DefinirSuperPoder(
     float populacao, 
     float area, 
@@ -14,7 +17,7 @@ int main() {
     char estadoCarta1;
     char codigoCarta1[4];
     char nomeCidadeCarta1[50];
-    int populacaoCarta1;
+    long int populacaoCarta1;
     float areaCarta1;
     float pibCarta1;
     int pontosturisticosCarta1;
@@ -24,7 +27,7 @@ int main() {
     char estadoCarta2;
     char codigoCarta2[4];
     char nomeCidadeCarta2[50];
-    int populacaoCarta2;
+    long int populacaoCarta2;
     float areaCarta2;
     float pibCarta2;
     int pontosturisticosCarta2;
@@ -99,11 +102,11 @@ int main() {
     printf("Área: %.2f km²\n", areaCarta2);
     printf("PIB: %.2f bilhões de reais\n", pibCarta2);
     printf("Número de Pontos Turísticos: %d\n", pontosturisticosCarta2);
-    printf("Densidade Populacional ciade 2: %.2f\n", Calcular(populacaoCarta2, areaCarta2));
+    printf("Densidade Populacional cidade 2: %.2f\n", Calcular(populacaoCarta2, areaCarta2));
     printf("PIB per Capita cidade 2: %.2f\n", Calcular(pibCarta2, populacaoCarta2));
 
-    float pibPerCapitaCidade1 = Calcular(populacaoCarta1, (float)populacaoCarta1);
-    float densidadePopulacionalCidade1 = Calcular(pibCarta1, populacaoCarta1);
+    float pibPerCapitaCidade1 = CalcularPibPerCapita(pibCarta1, (float)populacaoCarta1);
+    float densidadePopulacionalCidade1 = CalcularDensidadePopulacional((float)populacaoCarta1, areaCarta1);
     float superPoderCidade1 = DefinirSuperPoder(
         (float)populacaoCarta1,
         areaCarta1, 
@@ -113,8 +116,8 @@ int main() {
         densidadePopulacionalCidade1);
 
 
-    float pibPerCapitaCidade2 = Calcular(populacaoCarta2, (float)populacaoCarta2);
-    float densidadePopulacionalCidade2 = Calcular(pibCarta2, populacaoCarta2);
+    float pibPerCapitaCidade2 = CalcularPibPerCapita(pibCarta2, (float)populacaoCarta2);
+    float densidadePopulacionalCidade2 = CalcularDensidadePopulacional((float)populacaoCarta2, areaCarta2);
     float superPoderCidade2 = DefinirSuperPoder(
         (float)populacaoCarta2,
         areaCarta2, 
@@ -122,6 +125,8 @@ int main() {
         (float)pontosturisticosCarta2,
         pibPerCapitaCidade2,
         densidadePopulacionalCidade2);
+
+
 
 int venceuPopulacao = populacaoCarta1 > populacaoCarta2;
 int venceuArea = areaCarta1 > areaCarta2;
@@ -165,3 +170,11 @@ float DefinirSuperPoder(
 
     return resultado;
     }
+
+float CalcularPibPerCapita(float pib, long int populacao) {
+    return Calcular(pib * 1000000000, (float)populacao);
+}
+
+float CalcularDensidadePopulacional(long int populacao, float area) {
+    return Calcular((float)populacao, area);
+}
